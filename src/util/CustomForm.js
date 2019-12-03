@@ -1,81 +1,118 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {KeyboardDatePicker} from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import {
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	TextField,
-	Checkbox,
-	RadioGroup,
-	Radio,
-	InputAdornment,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  TextField,
+  Checkbox,
+  RadioGroup,
+  Radio,
+  InputAdornment,
 } from '@material-ui/core';
 import moment from 'moment';
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
 
-export const RenderTextField = ({label, input, mask, meta, InputProps, ...rest}) => {
-	const {name, onChange, value, ...restInput} = input;
-	const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) && meta.touched;
+export const RenderTextField = ({ label, input, meta, InputProps, ...rest }) => {
+  const { name, onChange, value, ...restInput } = input;
+  const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error)
+    && meta.touched;
 
-	return (
-		<TextField
-			{...rest}
-			label={label}
-			variant="outlined"
-			fullWidth
-			error={showError}
-			onChange={onChange}
-			value={value}
-			InputProps={{
-				...InputProps,
-				startAdornment: true && (
-					<InputAdornment position="start">
-						{!false ? <DoneIcon color="primary" /> : <ErrorIcon color="error" />}
-					</InputAdornment>
-				),
-			}}
-			helperText={showError ? meta.error || meta.submitError : undefined}
-		/>
-	);
+  return (
+    <TextField
+      {...rest}
+      label={label}
+      variant="outlined"
+      fullWidth
+      error={showError}
+      onChange={onChange}
+      value={value}
+      InputProps={{
+        ...restInput,
+        ...InputProps,
+        startAdornment: true && (
+          <InputAdornment position="start">
+            {!false ? <DoneIcon color="primary" /> : <ErrorIcon color="error" />}
+          </InputAdornment>
+        ),
+      }}
+      helperText={showError ? meta.error || meta.submitError : undefined}
+    />
+  );
 };
 
 RenderTextField.propTypes = {
-	label: PropTypes.string.isRequired,
-	input: PropTypes.object.isRequired,
-	meta: PropTypes.object.isRequired,
+  label: PropTypes.string,
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+  InputProps: PropTypes.object,
 };
 
-export const RenderDateField = ({label, input, meta, ...rest}) => {
-	const {name, onChange, value, ...restInput} = input;
-	const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) && meta.touched;
+export const RenderDateField = ({ label, input, meta, ...rest }) => {
+  const { name, onChange, value, ...restInput } = input;
+  const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error)
+    && meta.touched;
 
-	return (
-		<KeyboardDatePicker
-			{...rest}
-			label={label}
-			error={showError}
-			format="DD/MM/YYYY"
-			inputVariant="outlined"
-			onChange={onChange}
-			value={value ? moment(value) : null}
-			helperText={showError ? meta.error || meta.submitError : undefined}
-			InputProps={{
-				...restInput,
-				startAdornment: true && (
-					<InputAdornment position="start">
-						{!false ? <DoneIcon color="primary" /> : <ErrorIcon color="error" />}
-					</InputAdornment>
-				),
-			}}
-		/>
-	);
+  return (
+    <KeyboardDatePicker
+      {...rest}
+      label={label}
+      error={showError}
+      format="DD/MM/YYYY"
+      inputVariant="outlined"
+      onChange={onChange}
+      value={value ? moment(value) : null}
+      helperText={showError ? meta.error || meta.submitError : undefined}
+      InputProps={{
+        ...restInput,
+        startAdornment: true && (
+          <InputAdornment position="start">
+            {!false ? <DoneIcon color="primary" /> : <ErrorIcon color="error" />}
+          </InputAdornment>
+        ),
+      }}
+    />
+  );
 };
 
-RenderTextField.propTypes = {
-	label: PropTypes.string.isRequired,
-	input: PropTypes.object.isRequired,
-	meta: PropTypes.object.isRequired,
+RenderDateField.propTypes = {
+  label: PropTypes.string,
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
 };
 
+
+export const RenderAutoCompleteField = ({ label, input, meta, ...rest }) => {
+  const { name, onChange, value, ...restInput } = input;
+  const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error)
+    && meta.touched;
+
+  return (
+    <KeyboardDatePicker
+      {...rest}
+      label={label}
+      error={showError}
+      format="DD/MM/YYYY"
+      inputVariant="outlined"
+      onChange={onChange}
+      value={value ? moment(value) : null}
+      helperText={showError ? meta.error || meta.submitError : undefined}
+      InputProps={{
+        ...restInput,
+        startAdornment: true && (
+          <InputAdornment position="start">
+            {!false ? <DoneIcon color="primary" /> : <ErrorIcon color="error" />}
+          </InputAdornment>
+        ),
+      }}
+    />
+  );
+};
+
+RenderAutoCompleteField.propTypes = {
+  label: PropTypes.string,
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+};
