@@ -1,127 +1,93 @@
 import React from 'react';
 import {Form, Field} from 'react-final-form';
-import {RenderTextField} from 'util/CustomForm';
+import {RenderTextField, RenderDateField} from 'util/CustomForm';
+import {InputMaskCpf} from 'util/mask';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+import moment from 'moment';
+
+const DateTimeFields = (props) => (
+	<>
+		<Field
+			label="date"
+			component={RenderDateField}
+			name="date1"
+		/>
+		<Field
+			label="date"
+			component={RenderDateField}
+			name="date2"
+		/>
+		<Field
+			label="date"
+			component={RenderDateField}
+			name="date3"
+		/>
+		<Field
+			label="date"
+			component={RenderDateField}
+			name="date4"
+		/>
+	</>
+);
 
 const FormComponent = (props) => (
-	<form onSubmit={() => {}}>
+	<form
+		onSubmit={() => {}}
+		style={{
+			display: 'grid',
+			gridGap: 20,
+			gridTemplateColumns: 'auto auto auto',
+			padding: 20,
+		}}
+	>
 		<Field
 			label="domain"
 			component={RenderTextField}
+			InputProps={{inputComponent: InputMaskCpf}}
 			name="domain1"
 		/>
 		<Field
 			label="domain"
 			component={RenderTextField}
 			name="domain2"
-		/><Field
+		/>
+		<Field
 			label="domain"
 			component={RenderTextField}
 			name="domain3"
-		/><Field
+		/>
+		<Field
 			label="domain"
 			component={RenderTextField}
 			name="domain4"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain5"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain6"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain7"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain8"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain9"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain10"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain11"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain12"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain13"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain14"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain15"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain16"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain17"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain18"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain19"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain20"
-		/><Field
-			label="domain"
-			component={RenderTextField}
-			name="domain21"
 		/>
+		<DateTimeFields />
 	</form>
 );
 
 const App = () => (
 	<div>
-		<Form
-			onSubmit={(data) => console.log(data)}
-			initialValues={{
-				domain1: 'larry',
-				domain2: 'larry',
-				domain3: 'larry',
-				domain4: 'larry',
-				domain5: 'larry',
-				domain6: 'larry',
-				domain7: 'larry',
-				domain8: 'larry',
-				domain9: 'larry',
-				domain10: 'larry',
-				domain11: 'larry',
-				domain12: 'larry',
-				domain13: 'larry',
-				domain14: 'larry',
-				domain15: 'larry',
-				domain16: 'larry',
-				domain17: 'larry',
-				domain18: 'larry',
-				domain19: 'larry',
-				domain20: 'larry',
-				domain21: 'larry',
-			}}
-			render={FormComponent}
-		/>
+		<MuiPickersUtilsProvider
+			utils={MomentUtils}
+			locale="pt-BR"
+			moment={moment}
+		>
+			<Form
+				onSubmit={(data) => console.log(data)}
+				initialValues={{
+					domain1: '',
+					domain2: 'larry',
+					domain3: 'larry',
+					domain4: 'larry',
+					date1: moment().format('YYYY-MM-DD'),
+					date2: moment().format('YYYY-MM-DD'),
+					date3: moment().format('YYYY-MM-DD'),
+					date4: moment().format('YYYY-MM-DD'),
+				}}
+				render={FormComponent}
+			/>
+		</MuiPickersUtilsProvider>
 	</div>
 );
 
